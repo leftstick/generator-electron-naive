@@ -2,10 +2,6 @@
   "name": "generator-electron-naive",
   "version": "1.0.0",
   "description": "Create desktop app for a website in one minute",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leftstick/generator-electron-naive.git"
