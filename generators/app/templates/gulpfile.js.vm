@@ -18,7 +18,7 @@ gulp.task('default', ['clean-dist'], function() {
             packageJson: packageJson,
             release: './dist',
             cache: './cache',
-            version: 'v0.35.0',
+            version: 'v0.35.1',
             packaging: true,
             asar: true,
             platforms: [

@@ -29,7 +29,6 @@ var startupOpts = {
     frame: true,
     disableAutoHideCursor: false,
     autoHideMenuBar: false,
-    type: 'desktop',
     titleBarStyle: 'default'
 };
 
