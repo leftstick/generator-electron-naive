@@ -1,0 +1,29 @@
+{
+  "name": "generator-electron-naive",
+  "version": "1.0.0",
+  "description": "Create desktop app for a website in one minute",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leftstick/generator-electron-naive.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "electron",
+    "desktop"
+  ],
+  "author": "Howard.Zuo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leftstick/generator-electron-naive/issues"
+  },
+  "homepage": "https://github.com/leftstick/generator-electron-naive#readme",
+  "dependencies": {
+    "date-util": "^1.2.1",
+    "lodash": "^3.10.1",
+    "yeoman-generator": "^0.21.1"
+  }
+}

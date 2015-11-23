@@ -1,0 +1,14 @@
+{
+  "name": "<%= answers.name %>",
+  "version": "1.0.0",
+  "description": "<%= answers.description %>",
+  "scripts": {
+    "start": "node ./node_modules/.bin/gulp default"
+  },
+  "keywords": [
+    "electron",
+    "<%= answers.name %>"
+  ],
+  "author": "<%= answers.username %>",
+  "license": "MIT"
+}
