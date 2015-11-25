@@ -61,8 +61,32 @@ var gen = generators.Base.extend({
                 name: 'webUrl',
                 message: 'Your website to be packaged',
                 validate: function(webUrl) {
-                    return !!webUrl;
+                    return webUrl ? true : 'type url of your website';
                 }
+            },
+            {
+                type: 'input',
+                name: 'width',
+                message: 'Initial width of the app',
+                default: 800,
+                validate: function(width) {
+                    return isNaN(+width) ? 'width must be a number' : true;
+                }
+            },
+            {
+                type: 'input',
+                name: 'height',
+                message: 'Initial height of the app',
+                default: 600,
+                validate: function(height) {
+                    return isNaN(+height) ? 'height must be a number' : true;
+                }
+            },
+            {
+                type: 'confirm',
+                name: 'resizable',
+                message: 'Is the app resizable?',
+                default: true
             },
             {
                 type: 'checkbox',
@@ -123,7 +147,7 @@ var gen = generators.Base.extend({
         self.fs.copyTpl(self.templatePath('src-package.json.vm'), self.destinationPath('src/package.json'), self.obj);
     },
     install: function() {
-        this.npmInstall(['gulp','rimraf','gulp-electron'], {
+        this.npmInstall(['gulp', 'rimraf', 'gulp-electron'], {
             registry: this.answers.registry,
             saveDev: true
         });

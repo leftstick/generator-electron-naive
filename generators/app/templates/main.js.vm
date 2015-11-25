@@ -15,17 +15,17 @@ app.on('window-all-closed', function() {
 
 var startupOpts = {
     useContentSize: true,
-    width: 800,
-    height: 600,
+    width: <%= answers.width %>,
+    height: <%= answers.height %>,
     center: true,
-    resizable: true,
+    resizable: <%= answers.resizable %>,
     alwaysOnTop: false,
     fullscreen: false,
     skipTaskbar: true,
     kiosk: false,
     title: '',
     icon: null,
-    show: true,
+    show: false,
     frame: true,
     disableAutoHideCursor: false,
     autoHideMenuBar: false,
@@ -39,4 +39,5 @@ app.on('ready', function() {
     mainWindow.on('closed', function() {
         mainWindow = null;
     });
+    mainWindow.show();
 });
