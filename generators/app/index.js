@@ -94,13 +94,13 @@ var gen = generators.Base.extend({
                 message: 'Which platform you\'d like to package to?',
                 choices: [
                     'darwin',
-                    'darwin-x64',
                     'win32',
-                    'win32-ia32',
-                    'win64-64',
                     'linux',
+                    'darwin-x64',
                     'linux-ia32',
-                    'linux-x64'
+                    'linux-x64',
+                    'win32-ia32',
+                    'win32-x64'
                 ],
                 validate: function(platforms) {
                     return platforms.length > 0;
