@@ -1,6 +1,6 @@
 {
   "name": "generator-electron-naive",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Create desktop app for a website in one minute",
   "repository": {
     "type": "git",
@@ -19,7 +19,6 @@
   "homepage": "https://github.com/leftstick/generator-electron-naive#readme",
   "dependencies": {
     "date-util": "^1.2.1",
-    "lodash": "^3.10.1",
-    "yeoman-generator": "^0.22.2"
+    "yeoman-generator": "^0.22.4"
   }
 }

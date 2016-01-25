@@ -93,9 +93,6 @@ var gen = generators.Base.extend({
                 name: 'platforms',
                 message: 'Which platform you\'d like to package to?',
                 choices: [
-                    'darwin',
-                    'win32',
-                    'linux',
                     'darwin-x64',
                     'linux-ia32',
                     'linux-x64',
