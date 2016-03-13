@@ -3,6 +3,8 @@
 
 [![NPM version][npm-image]][npm-url]
 ![][david-url]
+![][dt-url]
+![][license-url]
 
 Create desktop app for a website in one minute
 
@@ -23,11 +25,17 @@ Create desktop app for a website in one minute
 ![](https://raw.githubusercontent.com/leftstick/generator-electron-naive/master/docs/img/questions.png)
 
 
-## generate your app ##
+## debug app ##
 
 Once your project is created by this `generator`, go into the project folder
 
-Run `npm start` to generate the executable file.
+Run `npm dev` to launch app in dev mode.
+
+## generate app ##
+
+Once your project is created by this `generator`, go into the project folder
+
+Run `npm dist` to generate the executable file.
 
 > The file will be generated into `dist` folder
 
@@ -43,8 +51,8 @@ Run `npm start` to generate the executable file.
 [MIT License](https://raw.githubusercontent.com/leftstick/generator-electron-naive/master/LICENSE)
 
 
-
-
 [npm-url]: https://npmjs.org/package/generator-electron-naive
 [npm-image]: https://badge.fury.io/js/generator-electron-naive.png
 [david-url]: https://david-dm.org/leftstick/generator-electron-naive.png
+[dt-url]:https://img.shields.io/npm/dt/generator-electron-naive.svg
+[license-url]:https://img.shields.io/npm/l/generator-electron-naive.svg

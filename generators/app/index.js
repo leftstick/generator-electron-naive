@@ -57,9 +57,18 @@ var gen = generators.Base.extend({
                 default: ''
             },
             {
+                type: 'confirm',
+                name: 'remote',
+                message: 'Use remote URL?',
+                default: true
+            },
+            {
                 type: 'input',
                 name: 'webUrl',
                 message: 'Your website to be packaged',
+                when: function(answers) {
+                    return answers.remote;
+                },
                 validate: function(webUrl) {
                     return webUrl ? true : 'type url of your website';
                 }
@@ -139,12 +148,15 @@ var gen = generators.Base.extend({
 
         self.copy(self.templatePath('gitignore'), self.destinationPath('.gitignore'));
         self.fs.copyTpl(self.templatePath('gulpfile.js.vm'), self.destinationPath('gulpfile.js'), self.obj);
+        if (!this.answers.remote) {
+            self.fs.copyTpl(self.templatePath('index.html.vm'), self.destinationPath('src/index.html'), self.obj);
+        }
         self.fs.copyTpl(self.templatePath('main.js.vm'), self.destinationPath('src/main.js'), self.obj);
         self.fs.copyTpl(self.templatePath('package.json.vm'), self.destinationPath('package.json'), self.obj);
         self.fs.copyTpl(self.templatePath('src-package.json.vm'), self.destinationPath('src/package.json'), self.obj);
     },
     install: function() {
-        this.npmInstall(['gulp', 'rimraf', 'gulp-electron'], {
+        this.npmInstall(['gulp', 'rimraf', 'gulp-electron', 'electron-prebuilt'], {
             registry: this.answers.registry,
             saveDev: true
         });

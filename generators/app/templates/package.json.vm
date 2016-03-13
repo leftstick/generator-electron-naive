@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "<%= answers.description %>",
   "scripts": {
-    "start": "node ./node_modules/.bin/gulp default"
+    "dist": "node ./node_modules/.bin/gulp dist",
+    "dev": "node ./node_modules/.bin/gulp dev"
   },
   "keywords": [
     "electron",

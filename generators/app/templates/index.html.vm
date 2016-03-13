@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= answers.name %></title>
+</head>
+<body>
+    <h1>Welcome to Electron!</h1>
+    <p>To get started, edit index.js</p>
+</body>
+</html>
