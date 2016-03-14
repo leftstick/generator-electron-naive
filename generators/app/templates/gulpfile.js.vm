@@ -1,7 +1,9 @@
 'use strict';
 
-var gulp = require('gulp');
+var gulp = require('gulp');<% if(!answers.remote){ %>
+var livereload = require('gulp-livereload');<% } %>
 var path = require('path');
+var semverRegex = require('semver-regex');
 var resolve = path.resolve;
 
 gulp.task('clean-dist', function() {
@@ -12,19 +14,18 @@ gulp.task('dist', ['clean-dist'], function() {
 
     var electron = require('gulp-electron');
     var packageJson = require('./package.json');
+    var matches = packageJson.devDependencies['electron-prebuilt'].match(semverRegex());
     return gulp.src('')
         .pipe(electron({
             src: './src/',
             packageJson: packageJson,
             release: './dist',
             cache: './cache',
-            version: 'v0.37.0',
+            version: 'v' + matches[0],
             packaging: true,
             asar: true,
-            platforms: [
-                <% answers.platforms.forEach(function(platform){ %>
-                '<%= platform %>',
-                <% }); %>
+            platforms: [<% answers.platforms.forEach(function(platform, index){ %>
+                '<%= platform %>'<%= (answers.platforms.length -1) === index ? '' : ',' %><% }); %>
             ],
             platformResources: {
                 darwin: {
@@ -43,7 +44,14 @@ gulp.task('dist', ['clean-dist'], function() {
         .pipe(gulp.dest(''));
 });
 
-gulp.task('dev', function(cb) {
+gulp.task('dev', function(cb) {<% if(!answers.remote){ %>
+
+    livereload.listen({port: 35729});
+
+    gulp.watch('src/*', function(event) {
+        gulp.src('src/*').pipe(livereload());
+    });
+    <% } %>
     var isWin = /^win/.test(process.platform);
     require('child_process')
         .exec((isWin ? 'sh' : 'node') + ' ./node_modules/.bin/electron ./src/', {

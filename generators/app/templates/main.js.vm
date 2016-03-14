@@ -38,6 +38,11 @@ app.on('ready', function() {
     <% if(answers.remote){ %>
     mainWindow.loadURL('<%= answers.webUrl %>');
     <% }else{ %>
+    if (process.env.NODE_ENV === 'dev') {
+        mainWindow.webContents.on('did-start-loading', function() {
+            mainWindow.webContents.executeJavaScript('var script = document.createElement(\'script\');script.type = \'text/javascript\';script.src=\'http://localhost:35729/livereload.js\';document.body.appendChild(script);');
+        });
+    }
     mainWindow.loadURL('file://' + __dirname + '/index.html');
     <% } %>
     mainWindow.on('closed', function() {

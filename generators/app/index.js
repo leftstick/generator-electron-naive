@@ -156,7 +156,11 @@ var gen = generators.Base.extend({
         self.fs.copyTpl(self.templatePath('src-package.json.vm'), self.destinationPath('src/package.json'), self.obj);
     },
     install: function() {
-        this.npmInstall(['gulp', 'rimraf', 'gulp-electron', 'electron-prebuilt'], {
+        var deps = ['gulp', 'rimraf', 'gulp-electron', 'electron-prebuilt', 'semver-regex'];
+        if (!this.answers.remote) {
+            deps.push('gulp-livereload');
+        }
+        this.npmInstall(deps, {
             registry: this.answers.registry,
             saveDev: true
         });
