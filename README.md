@@ -31,7 +31,7 @@ Once your project is created by this `generator`, go into the project folder
 
 Run `npm run dev` to launch app in dev mode.
 
-And `livereload` is enabled by default, so you can easily view your updates as following:
+And `livereload` is enabled by default while you choose not starting from a `remote URL`, so you can easily view your updates as following:
 
 ![](./docs/img/electron.gif)
 
