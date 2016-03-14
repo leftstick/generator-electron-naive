@@ -29,13 +29,17 @@ Create desktop app for a website in one minute
 
 Once your project is created by this `generator`, go into the project folder
 
-Run `npm dev` to launch app in dev mode.
+Run `npm run dev` to launch app in dev mode.
+
+And `livereload` is enabled by default, so you can easily view your updates as following:
+
+![](./docs/img/electron.gif)
 
 ## generate app ##
 
 Once your project is created by this `generator`, go into the project folder
 
-Run `npm dist` to generate the executable file.
+Run `npm run dist` to generate the executable file.
 
 > The file will be generated into `dist` folder
 
