@@ -98,19 +98,28 @@ var gen = generators.Base.extend({
                 default: true
             },
             {
-                type: 'checkbox',
-                name: 'platforms',
-                message: 'Which platform you\'d like to package to?',
+                type: 'list',
+                name: 'arch',
+                message: 'The target system architecture to build for',
                 choices: [
-                    'darwin-x64',
-                    'linux-ia32',
-                    'linux-x64',
-                    'win32-ia32',
-                    'win32-x64'
+                    'ia32',
+                    'x64',
+                    'all'
                 ],
-                validate: function(platforms) {
-                    return platforms.length > 0;
-                }
+                default: 'x64'
+            },
+            {
+                type: 'list',
+                name: 'platform',
+                message: 'The target platform to build for',
+                choices: [
+                    'linux',
+                    'win32',
+                    'darwin',
+                    'mas',
+                    'all'
+                ],
+                default: 'darwin'
             },
             {
                 type: 'list',
@@ -153,10 +162,9 @@ var gen = generators.Base.extend({
         }
         self.fs.copyTpl(self.templatePath('main.js.vm'), self.destinationPath('src/main.js'), self.obj);
         self.fs.copyTpl(self.templatePath('package.json.vm'), self.destinationPath('package.json'), self.obj);
-        self.fs.copyTpl(self.templatePath('src-package.json.vm'), self.destinationPath('src/package.json'), self.obj);
     },
     install: function() {
-        var deps = ['gulp', 'rimraf', 'gulp-electron', 'electron-prebuilt', 'semver-regex'];
+        var deps = ['gulp', 'rimraf', 'electron-packager', 'electron-prebuilt', 'semver-regex'];
         if (!this.answers.remote) {
             deps.push('gulp-livereload');
         }

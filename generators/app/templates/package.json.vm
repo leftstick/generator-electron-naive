@@ -2,9 +2,10 @@
   "name": "<%= answers.name %>",
   "version": "1.0.0",
   "description": "<%= answers.description %>",
+  "main": "src/main.js",
   "scripts": {
-    "dist": "node ./node_modules/.bin/gulp dist",
-    "dev": "node ./node_modules/.bin/gulp dev"
+    "dist": "gulp dist",
+    "dev": "gulp dev"
   },
   "keywords": [
     "electron",
