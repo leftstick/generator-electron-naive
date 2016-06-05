@@ -15,7 +15,7 @@ var gen = generators.Base.extend({
         var done = this.async();
         var self = this;
 
-        this.prompt([
+        return this.prompt([
             {
                 type: 'input',
                 name: 'name',
@@ -130,13 +130,14 @@ var gen = generators.Base.extend({
                     'https://registry.npmjs.org'
                 ]
             }
-        ], function(answers) {
-            require('date-util');
-            this.answers = answers;
-            this.answers.date = new Date().format('mmm d, yyyy');
-            this.obj = {answers: this.answers};
-            done();
-        }.bind(this));
+        ])
+            .then(function(answers) {
+                require('date-util');
+                self.answers = answers;
+                self.answers.date = new Date().format('mmm d, yyyy');
+                self.obj = {answers: self.answers};
+                done();
+            });
     },
     configuring: function() {
         var path = require('path');

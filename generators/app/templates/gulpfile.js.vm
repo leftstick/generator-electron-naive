@@ -19,7 +19,7 @@ gulp.task('dist', ['clean-dist'], function(cb) {
     packager({
         arch: '<%= answers.arch %>',
         platform: '<%= answers.platform %>',
-        'app-version': 'v' + version,
+        version: version,
         ignore: /node_modules|gulpfile\.js|\.gitignore/,
         dir: __dirname,
         asar: true,
