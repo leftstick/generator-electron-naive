@@ -1,26 +1,25 @@
-'use strict';
+const Generator = require('yeoman-generator');
 
-var generators = require('yeoman-generator');
+class gen extends Generator {
+    constructor(args, opts) {
+        super(args, opts);
+    }
 
-var gen = generators.Base.extend({
-    initializing: function() {
-
+    initializing() {
         try {
             this.username = process.env.USER || process.env.USERPROFILE.split(require('path').sep)[2];
         } catch (e) {
             this.username = '';
         }
-    },
-    prompting: function() {
-        var done = this.async();
-        var self = this;
+    }
 
+    prompting() {
         return this.prompt([
             {
                 type: 'input',
                 name: 'name',
                 message: 'Your project name',
-                validate: function(name) {
+                validate: name => {
                     if (!name) {
                         return 'Project name cannot be empty';
                     }
@@ -29,10 +28,10 @@ var gen = generators.Base.extend({
                     }
 
                     var fs = require('fs');
-                    if (!fs.existsSync(self.destinationPath(name))) {
+                    if (!fs.existsSync(this.destinationPath(name))) {
                         return true;
                     }
-                    if (require('fs').statSync(self.destinationPath(name)).isDirectory()) {
+                    if (require('fs').statSync(this.destinationPath(name)).isDirectory()) {
                         return 'Project already exist';
                     }
                     return true;
@@ -131,40 +130,41 @@ var gen = generators.Base.extend({
                 ]
             }
         ])
-            .then(function(answers) {
+            .then(answers => {
                 require('date-util');
-                self.answers = answers;
-                self.answers.date = new Date().format('mmm d, yyyy');
-                self.obj = {answers: self.answers};
-                done();
+                this.answers = answers;
+                this.answers.date = new Date().format('mmm d, yyyy');
+                this.obj = {
+                    answers: this.answers
+                };
             });
-    },
-    configuring: function() {
-        var path = require('path');
-        var fs = require('fs');
-        var self = this;
-        var done = this.async();
-        fs.exists(this.destinationPath(this.answers.name), function(exists) {
-            if (exists && fs.statSync(self.destinationPath(self.answers.name)).isDirectory()) {
-                self.log.error('Directory [' + self.answers.name + '] exists');
+    }
+
+    configuring(answers) {
+        const path = require('path');
+        const fs = require('fs');
+        const done = this.async();
+        fs.exists(this.destinationPath(this.answers.name), exists => {
+            if (exists && fs.statSync(this.destinationPath(this.answers.name)).isDirectory()) {
+                this.log.error('Directory [' + this.answers.name + '] exists');
                 process.exit(1);
             }
-            self.destinationRoot(path.join(self.destinationRoot(), self.answers.name));
+            this.destinationRoot(path.join(this.destinationRoot(), this.answers.name));
             done();
         });
-    },
-    writing: function() {
-        var self = this;
+    }
 
-        self.copy(self.templatePath('gitignore'), self.destinationPath('.gitignore'));
-        self.fs.copyTpl(self.templatePath('gulpfile.js.vm'), self.destinationPath('gulpfile.js'), self.obj);
+    writing() {
+        this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
+        this.fs.copyTpl(this.templatePath('gulpfile.js.vm'), this.destinationPath('gulpfile.js'), this.obj);
         if (!this.answers.remote) {
-            self.fs.copyTpl(self.templatePath('index.html.vm'), self.destinationPath('src/index.html'), self.obj);
+            this.fs.copyTpl(this.templatePath('index.html.vm'), this.destinationPath('src/index.html'), this.obj);
         }
-        self.fs.copyTpl(self.templatePath('main.js.vm'), self.destinationPath('src/main.js'), self.obj);
-        self.fs.copyTpl(self.templatePath('package.json.vm'), self.destinationPath('package.json'), self.obj);
-    },
-    install: function() {
+        this.fs.copyTpl(this.templatePath('main.js.vm'), this.destinationPath('src/main.js'), this.obj);
+        this.fs.copyTpl(this.templatePath('package.json.vm'), this.destinationPath('package.json'), this.obj);
+    }
+
+    install() {
         var deps = ['gulp', 'rimraf', 'electron-packager', 'electron-prebuilt', 'semver-regex'];
         if (!this.answers.remote) {
             deps.push('gulp-livereload');
@@ -173,10 +173,11 @@ var gen = generators.Base.extend({
             registry: this.answers.registry,
             saveDev: true
         });
-    },
-    end: function() {
-        this.log.ok('Project ' + this.answers.name + ' generated!!!');
     }
-});
+
+    end() {
+        this.log.ok(`Project ${this.answers.name} generated!!!`);
+    }
+}
 
 module.exports = gen;
