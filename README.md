@@ -6,6 +6,10 @@
 ![][dt-url]
 ![][license-url]
 
+ **Deprecated**
+ 
+ Please check [electron-awesome](https://github.com/leftstick/electron-awesome) for new version
+
 Create desktop app for a website in one minute
 
 
